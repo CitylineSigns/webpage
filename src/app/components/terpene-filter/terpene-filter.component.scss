@@ -1,0 +1,243 @@
+.terpene-filter {
+  .terpene-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+  
+  .terpene-chip {
+    position: relative;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border-color: var(--terpene-color);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: var(--terpene-color);
+      box-shadow: 0 0 0 3px rgba(var(--terpene-color), 0.1);
+    }
+    
+    &.selected {
+      background: linear-gradient(135deg, var(--terpene-color), rgba(var(--terpene-color), 0.8));
+      border-color: var(--terpene-color);
+      color: white;
+      
+      .terpene-name {
+        color: white;
+      }
+      
+      .effect-tag,
+      .flavor-tag {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+      
+      .terpene-indicator {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .terpene-chip-content {
+      flex: 1;
+    }
+    
+    .terpene-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    
+    .terpene-effects {
+      margin-bottom: 8px;
+      
+      .effect-tag {
+        display: inline-block;
+        background: rgba(var(--terpene-color), 0.1);
+        color: var(--terpene-color);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 4px;
+        margin-bottom: 4px;
+      }
+    }
+    
+    .terpene-flavors {
+      .flavor-tag {
+        display: inline-block;
+        background: rgba(var(--terpene-color), 0.05);
+        color: var(--terpene-color);
+        padding: 2px 6px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 500;
+        margin-right: 4px;
+        margin-bottom: 2px;
+        opacity: 0.8;
+      }
+    }
+    
+    .terpene-indicator {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      background: var(--terpene-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s ease;
+      
+      svg {
+        color: white;
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+  
+  .terpene-info {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(139, 195, 74, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #8bc34a;
+    
+    .info-text {
+      margin: 0;
+      color: #2d5016;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+}
+
+// CSS Custom Properties for terpene colors
+.terpene-chip {
+  --terpene-color: #6c757d;
+  
+  &[style*="--terpene-color: #8B4513"] {
+    --terpene-color: #8B4513;
+  }
+  
+  &[style*="--terpene-color: #FFD700"] {
+    --terpene-color: #FFD700;
+  }
+  
+  &[style*="--terpene-color: #228B22"] {
+    --terpene-color: #228B22;
+  }
+  
+  &[style*="--terpene-color: #DDA0DD"] {
+    --terpene-color: #DDA0DD;
+  }
+  
+  &[style*="--terpene-color: #8B0000"] {
+    --terpene-color: #8B0000;
+  }
+  
+  &[style*="--terpene-color: #654321"] {
+    --terpene-color: #654321;
+  }
+  
+  &[style*="--terpene-color: #90EE90"] {
+    --terpene-color: #90EE90;
+  }
+  
+  &[style*="--terpene-color: #98FB98"] {
+    --terpene-color: #98FB98;
+  }
+  
+  &[style*="--terpene-color: #FF69B4"] {
+    --terpene-color: #FF69B4;
+  }
+  
+  &[style*="--terpene-color: #F0F8FF"] {
+    --terpene-color: #F0F8FF;
+  }
+  
+  &[style*="--terpene-color: #E6E6FA"] {
+    --terpene-color: #E6E6FA;
+  }
+  
+  &[style*="--terpene-color: #FFA500"] {
+    --terpene-color: #FFA500;
+  }
+  
+  &[style*="--terpene-color: #00CED1"] {
+    --terpene-color: #00CED1;
+  }
+  
+  &[style*="--terpene-color: #2F4F4F"] {
+    --terpene-color: #2F4F4F;
+  }
+  
+  &[style*="--terpene-color: #FF8C00"] {
+    --terpene-color: #FF8C00;
+  }
+  
+  &[style*="--terpene-color: #32CD32"] {
+    --terpene-color: #32CD32;
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .terpene-chip {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+    
+    .terpene-indicator {
+      transition: none;
+    }
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .terpene-chip {
+    border: 2px solid black;
+    
+    &.selected {
+      border: 3px solid black;
+      background: black;
+      color: white;
+    }
+  }
+}
+
+// Focus styles for keyboard navigation
+.terpene-chip:focus-visible {
+  outline: 3px solid var(--terpene-color);
+  outline-offset: 2px;
+} 

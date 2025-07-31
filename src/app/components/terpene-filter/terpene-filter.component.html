@@ -1,0 +1,45 @@
+<div class="terpene-filter">
+  <div class="terpene-grid">
+    <button
+      *ngFor="let terpene of terpenes"
+      class="terpene-chip"
+      [class.selected]="isSelected(terpene.name)"
+      [style.--terpene-color]="getTerpeneColor(terpene.name)"
+      (click)="toggleTerpene(terpene.name)"
+      [attr.aria-label]="'Filter by ' + terpene.name + ' terpene'"
+      [attr.aria-pressed]="isSelected(terpene.name)"
+    >
+      <div class="terpene-chip-content">
+        <div class="terpene-name">{{ terpene.name }}</div>
+        <div class="terpene-effects">
+          <span 
+            *ngFor="let effect of getTerpeneEffects(terpene.name); let last = last"
+            class="effect-tag"
+          >
+            {{ effect }}{{ !last ? ',' : '' }}
+          </span>
+        </div>
+        <div class="terpene-flavors">
+          <span 
+            *ngFor="let flavor of getTerpeneFlavors(terpene.name); let last = last"
+            class="flavor-tag"
+          >
+            {{ flavor }}{{ !last ? ',' : '' }}
+          </span>
+        </div>
+      </div>
+      
+      <div class="terpene-indicator">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"></polyline>
+        </svg>
+      </div>
+    </button>
+  </div>
+  
+  <div class="terpene-info" *ngIf="selectedTerpenes.length > 0">
+    <p class="info-text">
+      Showing products with {{ selectedTerpenes.length }} selected terpene{{ selectedTerpenes.length > 1 ? 's' : '' }}
+    </p>
+  </div>
+</div> 

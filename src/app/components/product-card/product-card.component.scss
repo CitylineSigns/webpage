@@ -1,0 +1,321 @@
+.product-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .product-image {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .image-placeholder {
+      color: #6c757d;
+      opacity: 0.5;
+    }
+    
+    .product-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      
+      .category-badge,
+      .strain-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  
+  .product-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .product-header {
+      margin-bottom: 16px;
+      
+      .product-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+      }
+      
+      .product-brand {
+        font-size: 14px;
+        color: #6c757d;
+        font-weight: 500;
+      }
+    }
+    
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      
+      .potency-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        
+        .thc-content,
+        .cbd-content {
+          font-size: 12px;
+          font-weight: 600;
+          color: #2c3e50;
+          background: rgba(139, 195, 74, 0.1);
+          padding: 2px 8px;
+          border-radius: 8px;
+        }
+      }
+      
+      .price-info {
+        text-align: right;
+        
+        .price {
+          display: block;
+          font-size: 20px;
+          font-weight: 800;
+          color: #2d5016;
+          margin-bottom: 4px;
+        }
+        
+        .stock-status {
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          padding: 2px 6px;
+          border-radius: 6px;
+          
+          &.in-stock {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+          }
+          
+          &.out-of-stock {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+          }
+        }
+      }
+    }
+    
+    .potency-level {
+      margin-bottom: 16px;
+      
+      .potency-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+    
+    .product-description {
+      font-size: 14px;
+      color: #6c757d;
+      line-height: 1.5;
+      margin: 0 0 20px 0;
+      flex: 1;
+    }
+    
+    .effects-section,
+    .flavors-section,
+    .terpenes-section {
+      margin-bottom: 16px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .section-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 8px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .effects-tags,
+      .flavors-tags,
+      .terpenes-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        
+        .effect-tag,
+        .flavor-tag,
+        .terpene-tag {
+          padding: 4px 8px;
+          border-radius: 8px;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+        
+        .effect-tag {
+          background: rgba(52, 152, 219, 0.1);
+          color: #1a5276;
+        }
+        
+        .flavor-tag {
+          background: rgba(155, 89, 182, 0.1);
+          color: #6c3483;
+        }
+        
+        .terpene-tag {
+          background: rgba(var(--terpene-color), 0.1);
+          color: var(--terpene-color);
+        }
+      }
+    }
+  }
+}
+
+// CSS Custom Properties for terpene colors
+.terpene-tag {
+  --terpene-color: #6c757d;
+  
+  &[style*="--terpene-color: #8B4513"] {
+    --terpene-color: #8B4513;
+  }
+  
+  &[style*="--terpene-color: #FFD700"] {
+    --terpene-color: #FFD700;
+  }
+  
+  &[style*="--terpene-color: #228B22"] {
+    --terpene-color: #228B22;
+  }
+  
+  &[style*="--terpene-color: #DDA0DD"] {
+    --terpene-color: #DDA0DD;
+  }
+  
+  &[style*="--terpene-color: #8B0000"] {
+    --terpene-color: #8B0000;
+  }
+  
+  &[style*="--terpene-color: #654321"] {
+    --terpene-color: #654321;
+  }
+  
+  &[style*="--terpene-color: #90EE90"] {
+    --terpene-color: #90EE90;
+  }
+  
+  &[style*="--terpene-color: #98FB98"] {
+    --terpene-color: #98FB98;
+  }
+  
+  &[style*="--terpene-color: #FF69B4"] {
+    --terpene-color: #FF69B4;
+  }
+  
+  &[style*="--terpene-color: #F0F8FF"] {
+    --terpene-color: #F0F8FF;
+  }
+  
+  &[style*="--terpene-color: #E6E6FA"] {
+    --terpene-color: #E6E6FA;
+  }
+  
+  &[style*="--terpene-color: #FFA500"] {
+    --terpene-color: #FFA500;
+  }
+  
+  &[style*="--terpene-color: #00CED1"] {
+    --terpene-color: #00CED1;
+  }
+  
+  &[style*="--terpene-color: #2F4F4F"] {
+    --terpene-color: #2F4F4F;
+  }
+  
+  &[style*="--terpene-color: #FF8C00"] {
+    --terpene-color: #FF8C00;
+  }
+  
+  &[style*="--terpene-color: #32CD32"] {
+    --terpene-color: #32CD32;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .product-card {
+    .product-content {
+      padding: 16px;
+      
+      .product-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        
+        .price-info {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .product-card {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .product-card {
+    border: 2px solid black;
+    
+    .product-image {
+      border-bottom: 2px solid black;
+    }
+  }
+}
+
+// Focus styles for keyboard navigation
+.product-card:focus-visible {
+  outline: 3px solid #8bc34a;
+  outline-offset: 2px;
+} 

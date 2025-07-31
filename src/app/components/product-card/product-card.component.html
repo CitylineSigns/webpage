@@ -1,0 +1,102 @@
+<div class="product-card">
+  <!-- Product Image -->
+  <div class="product-image">
+    <div class="image-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21,15 16,10 5,21"></polyline>
+      </svg>
+    </div>
+    <div class="product-badges">
+      <span 
+        class="category-badge"
+        [style.background-color]="getStrainTypeColor(product.strainType)"
+      >
+        {{ getCategoryDisplayName(product.category) }}
+      </span>
+      <span 
+        class="strain-badge"
+        [style.background-color]="getStrainTypeColor(product.strainType)"
+      >
+        {{ getStrainTypeDisplayName(product.strainType) }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Product Content -->
+  <div class="product-content">
+    <!-- Header -->
+    <div class="product-header">
+      <h3 class="product-name">{{ product.name }}</h3>
+      <div class="product-brand">{{ product.brand }}</div>
+    </div>
+
+    <!-- Potency and Price -->
+    <div class="product-meta">
+      <div class="potency-info">
+        <span class="thc-content">THC: {{ product.thcContent }}%</span>
+        <span class="cbd-content" *ngIf="product.cbdContent > 0">CBD: {{ product.cbdContent }}%</span>
+      </div>
+      <div class="price-info">
+        <span class="price">{{ formatPrice(product.price) }}</span>
+        <span class="stock-status" [class.in-stock]="product.inStock" [class.out-of-stock]="!product.inStock">
+          {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Potency Level -->
+    <div class="potency-level">
+      <span 
+        class="potency-badge"
+        [style.background-color]="getPotencyColor(product.potency)"
+      >
+        {{ getPotencyDisplayName(product.potency) }} Potency
+      </span>
+    </div>
+
+    <!-- Description -->
+    <p class="product-description">{{ product.description }}</p>
+
+    <!-- Effects -->
+    <div class="effects-section" *ngIf="product.effects.length > 0">
+      <h4 class="section-title">Effects</h4>
+      <div class="effects-tags">
+        <span 
+          *ngFor="let effect of product.effects"
+          class="effect-tag"
+        >
+          {{ effect }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Flavors -->
+    <div class="flavors-section" *ngIf="product.flavors.length > 0">
+      <h4 class="section-title">Flavors</h4>
+      <div class="flavors-tags">
+        <span 
+          *ngFor="let flavor of product.flavors"
+          class="flavor-tag"
+        >
+          {{ flavor }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Dominant Terpenes -->
+    <div class="terpenes-section" *ngIf="product.dominantTerpenes.length > 0">
+      <h4 class="section-title">Dominant Terpenes</h4>
+      <div class="terpenes-tags">
+        <span 
+          *ngFor="let terpene of product.dominantTerpenes"
+          class="terpene-tag"
+          [style.--terpene-color]="getTerpeneColor(terpene)"
+        >
+          {{ terpene }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div> 

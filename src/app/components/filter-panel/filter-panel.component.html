@@ -1,0 +1,145 @@
+<div class="filter-panel">
+  <div class="filter-header">
+    <h3 class="filter-title">Filters</h3>
+  </div>
+
+  <!-- Categories Filter -->
+  <div class="filter-section">
+    <h4 class="section-title">Categories</h4>
+    <div class="filter-options">
+      <button
+        *ngFor="let category of availableCategories"
+        class="filter-option"
+        [class.selected]="isCategorySelected(category)"
+        (click)="toggleCategory(category)"
+        [attr.aria-label]="'Filter by ' + getCategoryDisplayName(category)"
+        [attr.aria-pressed]="isCategorySelected(category)"
+      >
+        {{ getCategoryDisplayName(category) }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Strain Types Filter -->
+  <div class="filter-section">
+    <h4 class="section-title">Strain Types</h4>
+    <div class="filter-options">
+      <button
+        *ngFor="let strainType of availableStrainTypes"
+        class="filter-option"
+        [class.selected]="isStrainTypeSelected(strainType)"
+        (click)="toggleStrainType(strainType)"
+        [attr.aria-label]="'Filter by ' + getStrainTypeDisplayName(strainType)"
+        [attr.aria-pressed]="isStrainTypeSelected(strainType)"
+      >
+        {{ getStrainTypeDisplayName(strainType) }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Potency Levels Filter -->
+  <div class="filter-section">
+    <h4 class="section-title">Potency Levels</h4>
+    <div class="filter-options">
+      <button
+        *ngFor="let potency of availablePotencyLevels"
+        class="filter-option"
+        [class.selected]="isPotencyLevelSelected(potency)"
+        (click)="togglePotencyLevel(potency)"
+        [attr.aria-label]="'Filter by ' + getPotencyDisplayName(potency) + ' potency'"
+        [attr.aria-pressed]="isPotencyLevelSelected(potency)"
+      >
+        {{ getPotencyDisplayName(potency) }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Effects Filter -->
+  <div class="filter-section">
+    <h4 class="section-title">Effects</h4>
+    <div class="filter-options effects-grid">
+      <button
+        *ngFor="let effect of availableEffects"
+        class="filter-option effect-option"
+        [class.selected]="isEffectSelected(effect)"
+        (click)="toggleEffect(effect)"
+        [attr.aria-label]="'Filter by ' + effect + ' effect'"
+        [attr.aria-pressed]="isEffectSelected(effect)"
+      >
+        {{ effect }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Price Range Filter -->
+  <div class="filter-section">
+    <h4 class="section-title">Price Range</h4>
+    <div class="price-range">
+      <div class="price-inputs">
+        <div class="price-input-group">
+          <label for="min-price" class="price-label">Min</label>
+          <input
+            id="min-price"
+            type="number"
+            [min]="availablePriceRange[0]"
+            [max]="availablePriceRange[1]"
+            [value]="priceRange[0]"
+            (input)="onMinPriceChange($event)"
+            class="price-input"
+            step="0.01"
+            aria-label="Minimum price"
+          >
+        </div>
+        <div class="price-separator">-</div>
+        <div class="price-input-group">
+          <label for="max-price" class="price-label">Max</label>
+          <input
+            id="max-price"
+            type="number"
+            [min]="availablePriceRange[0]"
+            [max]="availablePriceRange[1]"
+            [value]="priceRange[1]"
+            (input)="onMaxPriceChange($event)"
+            class="price-input"
+            step="0.01"
+            aria-label="Maximum price"
+          >
+        </div>
+      </div>
+      <div class="price-display">
+        {{ formatPrice(priceRange[0]) }} - {{ formatPrice(priceRange[1]) }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Filters Summary -->
+  <div class="active-filters" *ngIf="getActiveFilterCount() > 0">
+    <h4 class="section-title">Active Filters</h4>
+    <div class="active-filter-tags">
+      <span 
+        *ngFor="let category of selectedCategories"
+        class="active-filter-tag category-tag"
+      >
+        {{ getCategoryDisplayName(category) }}
+      </span>
+      <span 
+        *ngFor="let strainType of selectedStrainTypes"
+        class="active-filter-tag strain-tag"
+      >
+        {{ getStrainTypeDisplayName(strainType) }}
+      </span>
+      <span 
+        *ngFor="let potency of selectedPotencyLevels"
+        class="active-filter-tag potency-tag"
+      >
+        {{ getPotencyDisplayName(potency) }}
+      </span>
+      <span 
+        *ngFor="let effect of selectedEffects"
+        class="active-filter-tag effect-tag"
+      >
+        {{ effect }}
+      </span>
+    </div>
+  </div>
+</div> 

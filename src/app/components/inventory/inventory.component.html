@@ -1,0 +1,151 @@
+<div class="inventory-container">
+  <!-- Header Section -->
+  <header class="inventory-header">
+    <div class="header-content">
+      <div class="brand-section">
+        <h1 class="brand-title">Nuna Harvest</h1>
+        <p class="brand-subtitle">Rapid Inventory Index</p>
+      </div>
+      
+      <div class="search-section">
+        <div class="search-container">
+          <input 
+            type="text" 
+            placeholder="Search products, terpenes, effects..."
+            [(ngModel)]="searchTerm"
+            (input)="onSearchTermChange($any($event.target).value)"
+            class="search-input"
+            aria-label="Search inventory"
+          >
+          <button class="search-button" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-controls">
+        <button 
+          class="filter-toggle"
+          (click)="toggleFilters()"
+          [class.active]="showFilters"
+          aria-label="Toggle filters"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+          </svg>
+          Filters
+          <span class="filter-count" *ngIf="getActiveFilterCount() > 0">
+            {{ getActiveFilterCount() }}
+          </span>
+        </button>
+        
+        <button 
+          class="clear-filters"
+          (click)="clearAllFilters()"
+          *ngIf="getActiveFilterCount() > 0"
+          aria-label="Clear all filters"
+        >
+          Clear All
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="inventory-main">
+    <!-- Filter Panel -->
+    <aside class="filter-panel" [class.show]="showFilters">
+      <app-filter-panel
+        [availableCategories]="availableCategories"
+        [availableEffects]="availableEffects"
+        [availableStrainTypes]="availableStrainTypes"
+        [availablePotencyLevels]="availablePotencyLevels"
+        [availablePriceRange]="availablePriceRange"
+        [selectedCategories]="selectedCategories"
+        [selectedEffects]="selectedEffects"
+        [selectedStrainTypes]="selectedStrainTypes"
+        [selectedPotencyLevels]="selectedPotencyLevels"
+        [priceRange]="priceRange"
+        (categoriesChange)="onCategoriesChange($event)"
+        (effectsChange)="onEffectsChange($event)"
+        (strainTypesChange)="onStrainTypesChange($event)"
+        (potencyLevelsChange)="onPotencyLevelsChange($event)"
+        (priceRangeChange)="onPriceRangeChange($event)"
+      ></app-filter-panel>
+    </aside>
+
+    <!-- Terpene Quick Filter -->
+    <section class="terpene-quick-filter">
+      <h2 class="section-title">Quick Filter by Terpenes</h2>
+      <app-terpene-filter
+        [terpenes]="allTerpenes"
+        [selectedTerpenes]="selectedTerpenes"
+        (terpenesChange)="onTerpenesChange($event)"
+      ></app-terpene-filter>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+      <div class="products-header">
+        <h2 class="section-title">
+          Products 
+          <span class="product-count" *ngIf="filteredProducts.length > 0">
+            ({{ filteredProducts.length }})
+          </span>
+        </h2>
+        
+        <div class="view-controls">
+          <button class="view-button active" aria-label="Grid view">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-state" *ngIf="isLoading">
+        <div class="loading-spinner"></div>
+        <p>Loading inventory...</p>
+      </div>
+
+      <!-- No Results State -->
+      <div class="no-results" *ngIf="!isLoading && filteredProducts.length === 0">
+        <div class="no-results-content">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <h3>No products found</h3>
+          <p>Try adjusting your filters or search terms</p>
+          <button class="clear-filters-button" (click)="clearAllFilters()">
+            Clear All Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" *ngIf="!isLoading && filteredProducts.length > 0">
+        <app-product-card
+          *ngFor="let product of filteredProducts; trackBy: trackByProductId"
+          [product]="product"
+          [terpenes]="allTerpenes"
+        ></app-product-card>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="inventory-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Nuna Harvest. All rights reserved.</p>
+      <p>Licensed Dispensary in Mt. Vernon, NY</p>
+    </div>
+  </footer>
+</div> 

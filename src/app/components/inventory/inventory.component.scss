@@ -1,0 +1,429 @@
+// Variables
+$primary-color: #2d5016;
+$secondary-color: #4a7c59;
+$accent-color: #8bc34a;
+$background-color: #f8f9fa;
+$surface-color: #ffffff;
+$text-primary: #2c3e50;
+$text-secondary: #6c757d;
+$border-color: #e9ecef;
+$shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 12px;
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card-shadow {
+  box-shadow: $shadow;
+  border-radius: $border-radius;
+}
+
+@mixin button-base {
+  padding: 12px 24px;
+  border: none;
+  border-radius: $border-radius;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  font-size: 14px;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:focus {
+    outline: 2px solid $accent-color;
+    outline-offset: 2px;
+  }
+}
+
+// Main Container
+.inventory-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+// Header
+.inventory-header {
+  background: $surface-color;
+  border-bottom: 1px solid $border-color;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    @include flex-between;
+    gap: 24px;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+  
+  .brand-section {
+    .brand-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: $primary-color;
+      margin: 0;
+      background: linear-gradient(135deg, $primary-color, $secondary-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .brand-subtitle {
+      font-size: 14px;
+      color: $text-secondary;
+      margin: 4px 0 0 0;
+      font-weight: 500;
+    }
+  }
+  
+  .search-section {
+    flex: 1;
+    max-width: 500px;
+    
+    .search-container {
+      position: relative;
+      
+      .search-input {
+        width: 100%;
+        padding: 16px 20px 16px 50px;
+        border: 2px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 16px;
+        background: $surface-color;
+        transition: $transition;
+        
+        &:focus {
+          outline: none;
+          border-color: $accent-color;
+          box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.1);
+        }
+        
+        &::placeholder {
+          color: $text-secondary;
+        }
+      }
+      
+      .search-button {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: $text-secondary;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: $transition;
+        
+        &:hover {
+          color: $accent-color;
+          background: rgba(139, 195, 74, 0.1);
+        }
+      }
+    }
+  }
+  
+  .filter-controls {
+    @include flex-center;
+    gap: 12px;
+    
+    .filter-toggle {
+      @include button-base;
+      background: $primary-color;
+      color: white;
+      @include flex-center;
+      gap: 8px;
+      
+      &.active {
+        background: $accent-color;
+        color: $primary-color;
+      }
+      
+      .filter-count {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+    }
+    
+    .clear-filters {
+      @include button-base;
+      background: transparent;
+      color: $text-secondary;
+      border: 2px solid $border-color;
+      
+      &:hover {
+        background: $text-secondary;
+        color: white;
+        border-color: $text-secondary;
+      }
+    }
+  }
+}
+
+// Main Content
+.inventory-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 24px 16px;
+  }
+}
+
+// Filter Panel
+.filter-panel {
+  background: $surface-color;
+  @include card-shadow;
+  padding: 24px;
+  height: fit-content;
+  position: sticky;
+  top: 120px;
+  
+  @media (max-width: 1024px) {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    
+    &.show {
+      display: block;
+    }
+  }
+}
+
+// Terpene Quick Filter
+.terpene-quick-filter {
+  grid-column: 1 / -1;
+  background: $surface-color;
+  @include card-shadow;
+  padding: 24px;
+  
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 20px 0;
+  }
+}
+
+// Products Section
+.products-section {
+  .products-header {
+    @include flex-between;
+    margin-bottom: 24px;
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: $text-primary;
+      margin: 0;
+      @include flex-center;
+      gap: 12px;
+      
+      .product-count {
+        font-size: 16px;
+        color: $text-secondary;
+        font-weight: 500;
+      }
+    }
+    
+    .view-controls {
+      @include flex-center;
+      gap: 8px;
+      
+      .view-button {
+        @include button-base;
+        background: transparent;
+        color: $text-secondary;
+        border: 2px solid $border-color;
+        padding: 8px;
+        
+        &.active {
+          background: $accent-color;
+          color: $primary-color;
+          border-color: $accent-color;
+        }
+      }
+    }
+  }
+  
+  .loading-state {
+    @include flex-center;
+    flex-direction: column;
+    gap: 16px;
+    padding: 60px 20px;
+    color: $text-secondary;
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid $border-color;
+      border-top: 4px solid $accent-color;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+  
+  .no-results {
+    @include flex-center;
+    padding: 60px 20px;
+    
+    .no-results-content {
+      text-align: center;
+      color: $text-secondary;
+      
+      svg {
+        margin-bottom: 16px;
+        opacity: 0.5;
+      }
+      
+      h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: $text-primary;
+      }
+      
+      p {
+        margin: 0 0 24px 0;
+        font-size: 16px;
+      }
+      
+      .clear-filters-button {
+        @include button-base;
+        background: $accent-color;
+        color: $primary-color;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+}
+
+// Footer
+.inventory-footer {
+  background: $surface-color;
+  border-top: 1px solid $border-color;
+  padding: 24px 0;
+  margin-top: 60px;
+  
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+    color: $text-secondary;
+    font-size: 14px;
+    
+    p {
+      margin: 4px 0;
+    }
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .inventory-container {
+    background: white;
+  }
+  
+  .inventory-header {
+    border-bottom: 3px solid black;
+  }
+  
+  .filter-panel,
+  .terpene-quick-filter {
+    border: 2px solid black;
+  }
+}
+
+// Focus styles for keyboard navigation
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid $accent-color;
+  outline-offset: 2px;
+}
+
+// Print styles
+@media print {
+  .inventory-header,
+  .filter-panel,
+  .terpene-quick-filter,
+  .inventory-footer {
+    display: none;
+  }
+  
+  .inventory-main {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+} 
