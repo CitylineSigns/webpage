@@ -516,7 +516,7 @@ body {
 /* Hero CTA button - match home page style */
 .cta-button.hero-cta {
     display: inline-block !important;
-    background: #e74c3c !important;
+    background: #d63031 !important;
     color: white !important;
     padding: 15px 30px !important;
     text-decoration: none !important;
@@ -526,16 +526,16 @@ body {
     letter-spacing: 0.5px !important;
     text-transform: uppercase !important;
     transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+    box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3) !important;
     border: none !important;
     width: auto !important;
     max-width: none !important;
 }
 
 .cta-button.hero-cta:hover {
-    background: #c0392b !important;
+    background: #b71540 !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(214, 48, 49, 0.4) !important;
 }
 
 /* Responsive Design for Events Page */
