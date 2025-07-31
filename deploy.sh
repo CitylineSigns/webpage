@@ -14,8 +14,9 @@ NC='\033[0m' # No Color
 
 # Configuration
 PROJECT_NAME="citylinesigns"
-REMOTE_HOST="your-hostinger-ftp-hostname.com"  # Replace with your actual Hostinger FTP hostname
-REMOTE_USER="your-ftp-username"                 # Replace with your actual FTP username
+REMOTE_HOST="195.179.238.97"  # Replace with your actual Hostinger FTP hostname
+REMOTE_USER="u886809388.citylinesigns.com"                 # Replace with your actual FTP username
+REMOTE_PASS="your-ftp-password"                 # Replace with your actual FTP password
 REMOTE_PATH="/public_html/"                     # Hostinger's public directory
 LOCAL_PATH="./"
 
@@ -218,14 +219,14 @@ setup_config() {
     echo ""
     
     # Update the script with the credentials
-    sed -i.bak "s/REMOTE_HOST=\"your-hostinger-ftp-hostname.com\"/REMOTE_HOST=\"$ftp_host\"/" deploy.sh
-    sed -i.bak "s/REMOTE_USER=\"your-ftp-username\"/REMOTE_USER=\"$ftp_user\"/" deploy.sh
+    sed -i.bak "s|REMOTE_HOST=\"your-hostinger-ftp-hostname.com\"|REMOTE_HOST=\"$ftp_host\"|" deploy.sh
+    sed -i.bak "s|REMOTE_USER=\"your-ftp-username\"|REMOTE_USER=\"$ftp_user\"|" deploy.sh
     
     # Add password variable
     if ! grep -q "REMOTE_PASS" deploy.sh; then
         sed -i.bak "/REMOTE_USER=/a REMOTE_PASS=\"$ftp_pass\"" deploy.sh
     else
-        sed -i.bak "s/REMOTE_PASS=\"[^\"]*\"/REMOTE_PASS=\"$ftp_pass\"/" deploy.sh
+        sed -i.bak "s|REMOTE_PASS=\"[^\"]*\"|REMOTE_PASS=\"$ftp_pass\"|" deploy.sh
     fi
     
     rm deploy.sh.bak
