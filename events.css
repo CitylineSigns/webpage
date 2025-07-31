@@ -497,8 +497,8 @@ body {
 
 .cta-button.secondary {
     background: transparent !important;
-    color: var(--primary-color) !important;
-    border: 2px solid var(--primary-color) !important;
+    color: white !important;
+    border: 2px solid white !important;
     padding: 1rem 2rem !important;
     border-radius: 6px !important;
     text-decoration: none !important;
@@ -508,8 +508,8 @@ body {
 }
 
 .cta-button.secondary:hover {
-    background: var(--primary-color) !important;
-    color: white !important;
+    background: white !important;
+    color: var(--primary-color) !important;
     transform: translateY(-2px) !important;
 }
 
