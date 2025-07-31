@@ -513,6 +513,25 @@ body {
     transform: translateY(-2px) !important;
 }
 
+/* Specific styling for the Get a Quote button on events page */
+.cta-button.events-quote {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.cta-button.events-quote:hover {
+    background: white;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
 /* Hero CTA button - match home page style */
 .cta-button.hero-cta {
     display: inline-block !important;
