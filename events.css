@@ -496,28 +496,9 @@ body {
 }
 
 .cta-button.secondary {
-    background: transparent !important;
-    color: white !important;
-    border: 2px solid white !important;
-    padding: 1rem 2rem !important;
-    border-radius: 6px !important;
-    text-decoration: none !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    display: inline-block !important;
-}
-
-.cta-button.secondary:hover {
-    background: white !important;
-    color: var(--primary-color) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* Specific styling for the Get a Quote button on events page */
-.cta-button.events-quote {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     padding: 1rem 2rem;
     border-radius: 6px;
     text-decoration: none;
@@ -526,9 +507,9 @@ body {
     display: inline-block;
 }
 
-.cta-button.events-quote:hover {
-    background: white;
-    color: var(--primary-color);
+.cta-button.secondary:hover {
+    background: var(--primary-color);
+    color: white;
     transform: translateY(-2px);
 }
 
